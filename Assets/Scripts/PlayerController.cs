@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
             isRolling = true;
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
     }
 
     public void FixedUpdate()
@@ -45,9 +48,6 @@ public class PlayerController : MonoBehaviour
             moveSpeed = walkSpeed;
             isRunning = false;
         }
-
-       
-
         _rb.MovePosition(_rb.position + _movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 
@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetFloat("MoveInputX", _movement.x);
             _animator.SetFloat("MoveInputY", _movement.y);
             _animator.SetBool("Moving", true);
+     
             if(isRolling)
             {
                 _animator.SetTrigger("Rolling");
@@ -70,8 +71,6 @@ public class PlayerController : MonoBehaviour
                 _animator.speed = 1;
         }
         else
-        {
             _animator.SetBool("Moving", false);
-        }
     }
 }
